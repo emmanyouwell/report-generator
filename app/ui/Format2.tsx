@@ -1,4 +1,4 @@
-'use clinent';
+
 import {
   Page,
   Text,
@@ -147,7 +147,7 @@ interface PageData {
   contents: ContentBlock[];
 }
 const imgSrc = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_URL;
-export default function Format2({ pages }: { pages: PageData[] }) {
+const Format2 = ({ pages }: { pages: PageData[] }) =>{
   return (
     <Document>
       {pages.map((page, pageIndex) => {
@@ -197,7 +197,7 @@ export default function Format2({ pages }: { pages: PageData[] }) {
                     <View style={styles.cell} key={`row1-${idx}`}>
                       <Text style={styles.bold}>{daysOfWeek[idx]}</Text>
                       <Text style={styles.content}>• {entry.content}</Text>
-                      <Image src={entry.img} style={styles.contentImg} />
+                      <Image src={entry.img} style={styles.contentImg}/>
                     </View>
                   ))}
                 </View>
@@ -227,3 +227,5 @@ export default function Format2({ pages }: { pages: PageData[] }) {
     </Document>
   );
 }
+
+export default Format2;

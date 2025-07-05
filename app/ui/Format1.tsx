@@ -1,4 +1,4 @@
-'use clinent';
+import React from 'react';
 import {
   Page,
   Text,
@@ -161,7 +161,7 @@ const cellData = [
   },
 ];
 
-export default function Format1() {
+const Format1 = () => {
   return (
     <Document>
       <Page
@@ -236,3 +236,5 @@ export default function Format1() {
     </Document>
   );
 }
+
+export default Format1;
