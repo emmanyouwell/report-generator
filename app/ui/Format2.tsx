@@ -160,6 +160,7 @@ export default function Format2({ pages }: { pages: PageData[] }) {
             size={{ width: 612, height: 936 }}
             orientation='landscape'
             style={styles.page}
+            key={`page-${pageIndex}`}
           >
             {/* Header image */}
             <View>
