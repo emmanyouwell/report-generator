@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 export async function POST(req: Request) {
   const pages = await req.json();
 
-  const pdfBuffer = await pdf(<Format2 pages={pages} />).toBuffer();
+  const pdfBuffer = await pdf(<Format2 pages={pages} />).toBlob();
 
   return new NextResponse(pdfBuffer, {
     headers: {
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 }
 
 export async function GET() {
-  const  pdfBuffer = await pdf(<Format1 />).toBuffer();
+  const  pdfBuffer = await pdf(<Format1 />).toBlob();
 
   return new NextResponse(pdfBuffer, {
     headers: {
