@@ -103,117 +103,125 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'BookmanOldStyle',
     width: '100%',
-  }
+  },
 });
 const daysOfWeek = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-]
-const cellData = [
-  {
-    date: 'February 3, 2025',
-    content: `On January 2, I visited all the sections I handled, but unfortunately, there were no learners inside; only the advisers were there.`,
-    img: 'http://localhost:3000/images/header.png',
-  },
-  {
-    date: 'February 4, 2025',
-    content: `As of today, I have catered to eight learners in the first session for remedial reading in Grade 1 at Building 1 from 7:00 to 8:30 AM. The second session, from 9:00 to 10:00 AM, was for fast readers.`,
-    img: 'http://localhost:3000/images/header.png',
-  },
-  {
-    date: 'February 5, 2025',
-    content: `Today, all Grade 1 pupils took their summative exam. We were not allowed to take the children out of the class. I assisted the adviser in checking the test papers.`,
-    img: 'http://localhost:3000/images/header.png',
-  },
-  {
-    date: 'February 6, 2025',
-    content: `I catered to six learners from another building. In the admin, there were only 10 learners in my first session, as some were absent.`,
-    img: 'http://localhost:3000/images/header.png',
-  },
-  {
-    date: 'February 7, 2025',
-    content: `I visited Building 1, my assigned building, but only eight learners were available for tutoring today as some were taking their summative exam.`,
-    img: 'http://localhost:3000/images/header.png',
-  },
- 
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
 ];
-export default function Format2() {
+// const cellData = [
+//   {
+//     content: `On January 2, I visited all the sections I handled, but unfortunately, there were no learners inside; only the advisers were there.`,
+//     img: 'http://localhost:3000/images/header.png',
+//   },
+//   {
+//     content: `As of today, I have catered to eight learners in the first session for remedial reading in Grade 1 at Building 1 from 7:00 to 8:30 AM. The second session, from 9:00 to 10:00 AM, was for fast readers.`,
+//     img: 'http://localhost:3000/images/header.png',
+//   },
+//   {
+//     content: `Today, all Grade 1 pupils took their summative exam. We were not allowed to take the children out of the class. I assisted the adviser in checking the test papers.`,
+//     img: 'http://localhost:3000/images/header.png',
+//   },
+//   {
+//     content: `I catered to six learners from another building. In the admin, there were only 10 learners in my first session, as some were absent.`,
+//     img: 'http://localhost:3000/images/header.png',
+//   },
+//   {
+//     content: `I visited Building 1, my assigned building, but only eight learners were available for tutoring today as some were taking their summative exam.`,
+//     img: 'http://localhost:3000/images/header.png',
+//   },
+
+// ];
+interface ContentBlock {
+  content: string;
+  img?: string;
+}
+
+interface PageData {
+  dateRange: string;
+  contents: ContentBlock[];
+}
+export default function Format2({ pages }: { pages: PageData[] }) {
   return (
     <Document>
-      <Page
-        size={{ width: 612, height: 936 }}
-        orientation='landscape'
-        style={styles.page}
-      >
-        {/* Header image */}
-        <View>
-          <Image
-            src='http://localhost:3000/images/header.png'
-            style={styles.headerImg}
-          />
-        </View>
-        {/* Teacher's name, school/cluster, and date */}
-        <View style={styles.section}>
-          <Text style={styles.text}>
-            Teacher's name:{' '}
-            <Text style={styles.highlight}>Roselyn L. Mingala</Text>
-          </Text>
-          <Text style={styles.text}>
-            School/Cluster:{' '}
-            <Text style={styles.highlight}>
-              EM's SIGNAL VILLAGE ELEMENTARY SCHOOL/ CLUSTER V
-            </Text>
-          </Text>
-          <Text style={styles.text}>
-            Date: <Text style={styles.highlight}>[Insert Date Here]</Text>
-          </Text>
-        </View>
+      {pages.map((page, pageIndex) => {
+        const rows = Array.from(
+          { length: Math.ceil(page.contents.length / 5) },
+          (_, i) => page.contents.slice(i * 5, i * 5 + 5)
+        );
 
-        {/* Table */}
-        <View style={styles.section}>
-          {/* First Row (5 columns) */}
-          <View style={styles.row}>
-            {cellData.slice(0, 5).map((entry, idx) => (
-              <View style={styles.cell} key={`row1-${idx}`}>
-                <Text style={styles.bold}>{daysOfWeek[idx]}</Text>
-                <Text style={styles.content}>• {entry.content}</Text>
-                <Image src={entry.img} style={styles.contentImg} />
-              </View>
-            ))}
-          </View>
-
-          
-        </View>
-
-        {/* Footer */}
-        <View style={styles.section}>
-          <View style={styles.footerRow}>
-            <Text style={styles.footerLabel}>Prepared by:</Text>
-            <Text style={styles.footerLabel}>Checked by:</Text>
-          </View>
-          <View style={[styles.footerRow, {marginBottom: 0}]}>
-            <Text style={styles.footerName}>
-              ROSELYN L. MINGALA
-            </Text>
-            <Text style={styles.footerName}>
-              MA. CARLITA P. AGCAOILI
-            </Text>
-          </View>
-          <View
-            style={[styles.footerRow, {marginTop: 5}]}
+        return (
+          <Page
+            size={{ width: 612, height: 936 }}
+            orientation='landscape'
+            style={styles.page}
           >
-            <Text style={styles.footerPosition}>TALAS Teacher</Text>
-            <Text style={styles.footerPosition}>
-              Master Teacher / TALAS in-charge
-            </Text>
-          </View>
-        </View>
-      </Page>
+            {/* Header image */}
+            <View>
+              <Image
+                src='http://localhost:3000/images/header.png'
+                style={styles.headerImg}
+              />
+            </View>
+            {/* Teacher's name, school/cluster, and date */}
+            <View style={styles.section}>
+              <Text style={styles.text}>
+                Teacher's name:{' '}
+                <Text style={styles.highlight}>Roselyn L. Mingala</Text>
+              </Text>
+              <Text style={styles.text}>
+                School/Cluster:{' '}
+                <Text style={styles.highlight}>
+                  EM's SIGNAL VILLAGE ELEMENTARY SCHOOL/ CLUSTER V
+                </Text>
+              </Text>
+              <Text style={styles.text}>
+                Date: <Text style={styles.highlight}>{page.dateRange}</Text>
+              </Text>
+            </View>
+
+            {/* Table */}
+            <View style={styles.section}>
+              {/* First Row (5 columns) */}
+
+              {rows.map((row, rowIndex) => (
+                <View style={styles.row} key={`row-${pageIndex}-${rowIndex}`}>
+                  {row.map((entry, idx) => (
+                    <View style={styles.cell} key={`row1-${idx}`}>
+                      <Text style={styles.bold}>{daysOfWeek[idx]}</Text>
+                      <Text style={styles.content}>• {entry.content}</Text>
+                      <Image src={entry.img} style={styles.contentImg} />
+                    </View>
+                  ))}
+                </View>
+              ))}
+            </View>
+
+            {/* Footer */}
+            <View style={styles.section}>
+              <View style={styles.footerRow}>
+                <Text style={styles.footerLabel}>Prepared by:</Text>
+                <Text style={styles.footerLabel}>Checked by:</Text>
+              </View>
+              <View style={[styles.footerRow, { marginBottom: 0 }]}>
+                <Text style={styles.footerName}>ROSELYN L. MINGALA</Text>
+                <Text style={styles.footerName}>MA. CARLITA P. AGCAOILI</Text>
+              </View>
+              <View style={[styles.footerRow, { marginTop: 5 }]}>
+                <Text style={styles.footerPosition}>TALAS Teacher</Text>
+                <Text style={styles.footerPosition}>
+                  Master Teacher / TALAS in-charge
+                </Text>
+              </View>
+            </View>
+          </Page>
+        );
+      })}
     </Document>
   );
 }
