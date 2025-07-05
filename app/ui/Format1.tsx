@@ -174,13 +174,13 @@ export default function Format1() {
         {/* Teacher's name, school/cluster, and date */}
         <View style={styles.section}>
           <Text style={styles.text}>
-            Teacher's name:{' '}
+            Teacher&apos;s name:{' '}
             <Text style={styles.highlight}>Roselyn L. Mingala</Text>
           </Text>
           <Text style={styles.text}>
             School/Cluster:{' '}
             <Text style={styles.highlight}>
-              EM's SIGNAL VILLAGE ELEMENTARY SCHOOL/ CLUSTER V
+              EM&apos;s SIGNAL VILLAGE ELEMENTARY SCHOOL/ CLUSTER V
             </Text>
           </Text>
           <Text style={styles.text}>

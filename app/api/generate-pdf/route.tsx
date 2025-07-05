@@ -23,7 +23,7 @@ export async function GET() {
   return new NextResponse(pdfBuffer, {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename="generated.pdf"',
+      'Content-Disposition': 'inline; filename="generated.pdf"',
     },
   });
 }
