@@ -146,6 +146,7 @@ interface PageData {
   dateRange: string;
   contents: ContentBlock[];
 }
+const imgSrc = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_URL;
 export default function Format2({ pages }: { pages: PageData[] }) {
   return (
     <Document>
@@ -165,7 +166,7 @@ export default function Format2({ pages }: { pages: PageData[] }) {
             {/* Header image */}
             <View>
               <Image
-                src='http://localhost:3000/images/header.png'
+                src={`${imgSrc}/images/header.png`}
                 style={styles.headerImg}
               />
             </View>
