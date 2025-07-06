@@ -16,7 +16,7 @@ export async function GET() {
       },
     });
   } catch (error) {
-    return new NextResponse('Error generating PDF', { status: 500 });
+    return new NextResponse(`Error generating PDF: ${error}`, { status: 500 });
   }
 }
 
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    return new NextResponse('Error generating PDF', { status: 500 });
+    return new NextResponse(`Error generating PDF: ${error}`, { status: 500 });
   }
 }
 
