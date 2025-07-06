@@ -1,4 +1,3 @@
-
 import {
   Page,
   Text,
@@ -9,16 +8,20 @@ import {
   Font,
 } from '@react-pdf/renderer';
 
+const apiUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : process.env.NEXT_PUBLIC_URL;
 Font.register({
   family: 'BookmanOldStyle',
   fonts: [
     {
-      src: 'http://localhost:3000/fonts/BOOKOS.TTF',
+      src: `${apiUrl}/fonts/BOOKOS.TTF`,
       fontWeight: 'normal',
       fontStyle: 'normal',
     },
     {
-      src: 'http://localhost:3000/fonts/BOOKOSB.TTF',
+      src: `${apiUrl}/fonts/BOOKOSB.TTF`,
       fontWeight: 'bold',
       fontStyle: 'normal',
     },
@@ -146,8 +149,8 @@ interface PageData {
   dateRange: string;
   contents: ContentBlock[];
 }
-const imgSrc = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : process.env.NEXT_PUBLIC_URL;
-const Format2 = ({ pages }: { pages: PageData[] }) =>{
+
+const Format2 = ({ pages }: { pages: PageData[] }) => {
   return (
     <Document>
       {pages.map((page, pageIndex) => {
@@ -166,7 +169,7 @@ const Format2 = ({ pages }: { pages: PageData[] }) =>{
             {/* Header image */}
             <View>
               <Image
-                src={`${imgSrc}/images/header.png`}
+                src={`${apiUrl}/images/header.png`}
                 style={styles.headerImg}
               />
             </View>
@@ -197,7 +200,7 @@ const Format2 = ({ pages }: { pages: PageData[] }) =>{
                     <View style={styles.cell} key={`row1-${idx}`}>
                       <Text style={styles.bold}>{daysOfWeek[idx]}</Text>
                       <Text style={styles.content}>• {entry.content}</Text>
-                      <Image src={entry.img} style={styles.contentImg}/>
+                      <Image src={entry.img} style={styles.contentImg} />
                     </View>
                   ))}
                 </View>
@@ -226,6 +229,6 @@ const Format2 = ({ pages }: { pages: PageData[] }) =>{
       })}
     </Document>
   );
-}
+};
 
 export default Format2;
